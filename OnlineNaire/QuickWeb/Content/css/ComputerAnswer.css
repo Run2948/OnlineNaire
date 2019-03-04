@@ -1,0 +1,210 @@
+/*手机答题界面UI*/
+
+input[type=radio] {
+    margin: 0px;
+}
+
+input[type=checkbox] {
+    margin: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    font-family: "Microsoft Yahei",helvetica;
+    background: #f5f5f5;
+    color: #333;
+    position: relative;
+    word-break: break-all;
+    word-wrap: break-word;
+    background: #f5f5f5;
+    /*background-image: url(http://askform.cn/content/themes/blueGreen/img/bg.jpg);*/
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#form1 {
+    width: 850px;
+    margin: 0 auto;
+}
+
+.questionnaire_logo {
+    height: 62px;
+    padding: 5px 0px;
+}
+
+.questionnaire_title {
+    background-color: #428bca !important;
+    padding: 12px 10px;
+    width: 100%;
+    color: #ffffff;
+}
+
+.questionnaire_title_name {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.questionnaire_content {
+    margin: 0px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.questionnaire_summary {
+    margin: 10px 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.questionnaire_question {
+    margin-top: 20px;
+}
+
+.questionnaire_question_item {
+    margin-bottom: 20px;
+    padding-top: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-bottom: 1px dotted #d5d5d5;
+}
+
+.questionnaire_question_item_name {
+    font-weight: bold;
+    font-size: 16px !important;
+}
+
+.questionnaire_question_item_name_index {
+    padding-right: 0px;
+}
+
+.questionnaire_question_item_name_name {
+}
+
+.questionnaire_question_item_name_mustinput {
+    color: red;
+}
+
+.questionnaire_question_item_option {
+   
+    padding: 0px;
+    margin: 5px 0px;
+    background-color: #ffffff;
+}
+
+.questionnaire_question_item_option_option {
+   
+    font-size: 16px;
+    padding: 8px 0px 8px 12px;
+    cursor: pointer;
+  
+    display: inline-block;
+}
+
+    .questionnaire_question_item_option_option:hover {
+        background-color: #f5f5f5;
+    }
+
+    .questionnaire_question_item_option_option input {
+        border-radius: 0px;
+    }
+
+.questionnaire_question_item_option_option_radio {
+    display: inline-block;
+    margin: 0px;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    vertical-align: -3px;
+    cursor: pointer;
+}
+
+.questionnaire_question_item_option_option_label {
+    display: inline-block;
+    margin-bottom: 0px;
+    font-weight: initial;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.questionnaire_question_item_tiankong {
+    padding: 0px;
+    margin: 5px 0px;
+    background-color: #ffffff;
+}
+
+    .questionnaire_question_item_tiankong input {
+        border-radius: 0px;
+    }
+
+    .questionnaire_question_item_tiankong textarea {
+        border-radius: 0px;
+    }
+
+.questionnaire_question_item_xialacaidan {
+    padding: 0px;
+    margin: 5px 0px;
+}
+
+    .questionnaire_question_item_xialacaidan select {
+        border-radius: 0px;
+        background-color: #ffffff;
+        width: 100%;
+    }
+
+.questionnaire_question_item_erjixialacaidan {
+    padding: 0px;
+    margin: 5px 0px;
+}
+
+    .questionnaire_question_item_erjixialacaidan select {
+        border-radius: 0px;
+        margin: 0px;
+        padding: 0px;
+        display: inline-block;
+        width: 49.5%;
+        background-color: #ffffff;
+    }
+
+
+.questionnaire_question_item_juzhen {
+    padding: 8px;
+    margin: 5px 0px;
+    background-color: #ffffff;
+}
+
+
+    .questionnaire_question_item_juzhen .table > thead > tr > td, .table > tbody > tr > td {
+        padding: 8px 0px;
+        line-height: 1.42857143;
+        vertical-align: top;
+        border-top: initial !important;
+        text-align: center;
+    }
+
+    .questionnaire_question_item_juzhen input[type=radio], input[type=checkbox] {
+        display: inline-block;
+        margin: 0px;
+        line-height: 18px;
+        height: 18px;
+        width: 18px;
+        vertical-align: -3px;
+    }
+
+    .questionnaire_question_item_juzhen input {
+        border-radius: 0px;
+        width: 80%;
+    }
+
+.errorDiv {
+    border: 2px solid #ffd800;
+}

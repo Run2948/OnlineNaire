@@ -1,0 +1,38 @@
+html {overflow-x:hidden;}
+
+.custom_service p img {display: inline; vertical-align:middle;}
+.scrollsidebar{position:absolute; z-index:999; top:350px;right:0}
+.side_content{width:154px; height:auto; overflow:hidden; float:left; }
+.side_content .side_list {width:154px;overflow:hidden;}
+.show_btn{ width:0; height:112px; overflow:hidden; margin-top:50px; float:left; cursor:pointer;}
+.show_btn span { display:none;}
+.close_btn{width:24px;height:24px;cursor:pointer;}
+.side_title,.side_bottom,.close_btn,.show_btn {background:url(../kefu/sidebar_bg.png) no-repeat;}
+.side_title {height:46px;}
+.side_bottom { height:8px;}
+.side_center {font-family:Verdana, Geneva, sans-serif; padding:5px 12px; font-size:12px;}
+.close_btn { float:right; display:block; width:21px; height:16px; margin:16px 10px 0 0; _margin:16px 5px 0 0;}
+.close_btn span { display:none;}
+.side_center .custom_service p { text-align:center; padding:6px 0; margin:0; vertical-align:middle;}
+.other  { text-align:center;border-bottom:1px solid #ddd;border-top:1px solid #ddd}
+.other p { padding:5px 0; _height:16px; margin:0;color: #666666;}
+.msgserver { text-align:center; margin-bottom:5px;}
+.msgserver a { background:url(../kefu/sidebar_bg.png) no-repeat -119px -115px; padding-left:22px;}
+
+/* blue skin as the default skin */
+.side_title, .side_blue .side_title {background-position:-195px 0;}
+.side_center, .side_blue .side_center {background:url(../kefu/blue_line.png) repeat-y center;}
+.side_bottom, .side_blue .side_bottom {background-position:-195px -50px;}
+.close_btn, .side_blue .close_btn {background-position:-44px 0;}
+.close_btn:hover, .side_blue .close_btn:hover {background-position:-66px 0;}
+.show_btn , .side_blue .show_btn {background-position:-119px 0;}
+.msgserver a, .side_blue .msgserver a {color:#06C;}
+
+/* green skin  */
+.side_green .side_title {background-position:-349px 0;}
+.side_green .side_center {background:url(../kefu/green_line.png) repeat-y center;}
+.side_green .side_bottom {background-position:-349px -50px;}
+.side_green .close_btn {background-position:-44px -23px;}
+.side_green .close_btn:hover {background-position:-66px -23px;}
+.side_green .show_btn {background-position:-147px 0;}
+.side_green .msgserver a {color:#76a20c;}

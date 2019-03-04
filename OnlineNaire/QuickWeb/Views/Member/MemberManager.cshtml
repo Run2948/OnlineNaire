@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+
+    <div class="col-xs-12">
+        <div class="">
+            <form class="form-inline" id="formSearch">
+                <input type="hidden" name="pageIndex" id="pageIndex" value="1" />
+
+                <div class="form-group">
+                    <input name="LoginName" id="LoginName" style="width:200px;" placeholder="登录名" value="" class="form-control" type="text" />
+                    <input name="RelName" id="RelName" style="width:200px;" placeholder="真实姓名" value="" class="form-control" type="text" />
+
+                </div>
+
+                <select class='form-control' name='pageSize'> <option value='5'>每页5条</option> <option value='10' selected='selected'>每页10条</option> <option value='15'>每页15条</option> <option value='20'>每页20条</option> <option value='30'>每页30条</option> <option value='50'>每页50条</option> <option value='100'>每页100条</option></select>
+
+                <span class="btn btn-info btnLoginLogSearch" aria-hidden="true">搜索</span>
+                <div class="btn btn-info MemberCreate" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">添加</div>
+
+
+
+
+            </form>
+        </div>
+        <div id="loanTable" class="" style="border-bottom: 0px;font-size:14px;margin-bottom:3px;margin-top:3px;">
+
+        </div>
+        <div>
+            <div class="pagesizes">
+                <!-- 显示分页条 -->
+                <div id="Pagination" class="mypagebar">
+                </div>
+            </div>
+            <!-- 显示总记录数 -->
+            <div id="pageSetting">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var pagedListUrl = "/Member/MemberPagedList";
+    LoadPageBar(pagedListUrl, "Pagination", 0);
+    $(".btnLoginLogSearch").click(function () {
+        $("#pageIndex").val(1);
+        LoadPageBar(pagedListUrl, "Pagination", 0);
+    });
+
+    $(".MemberCreate").click(function () {
+        $("#myModalLabel").text("添加成员").parent().parent().parent().css("width", "400px");
+        $("#myModalLabel").parent().show();
+        $.get("/Member/MemberAddView", {}, function (html) {
+            $("#myContent").html(html);
+
+
+        });
+    });
+</script>

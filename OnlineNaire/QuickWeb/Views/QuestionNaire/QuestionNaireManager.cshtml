@@ -1,0 +1,163 @@
+﻿
+@{
+    Layout = null;
+}
+
+<style>
+    .questionManagerContainer {
+        padding: 15px;
+    }
+
+    .questionTabSelect {
+        border-bottom: 1px solid #eef1f5;
+        padding: 0px;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="row questionManagerContainer">
+
+    <!--功能tab-->
+    <div class="col-xs-12  questionTabSelect">
+        <div style="vertical-align:central;font-size:16px;float:left;">
+            <a href="javascript:void(0);" type="wjmc">1.问卷名称</a>
+            <i class="fa fa-long-arrow-right"></i>
+            <a href="javascript:void(0);" type="wjtm">2.问卷题目</a>
+            <i class="fa fa-long-arrow-right"></i>
+
+            <a href="javascript:void(0);" type="wjsz">3.问卷设置</a>
+            <i class="fa fa-long-arrow-right"></i>
+            <a href="javascript:void(0);" type="wjcb">4.问卷传播</a>
+            <i class="fa fa-long-arrow-right"></i>
+            <a href="javascript:void(0);" type="wjhs">5.问卷回收</a>
+            <i class="fa fa-long-arrow-right"></i>
+            <a href="javascript:void(0);" type="dtfx">6.单题分析</a>
+            <i class="fa fa-long-arrow-right"></i>
+            <a href="javascript:void(0);" type="jcfx">7.交叉分析</a>
+        </div>
+        <div style="float:right;">
+            <span class="btn btn-primary btnQuestionnaireStart" data-id="12954" style="margin-right:10px;">发布</span>
+            <span style="margin-right:10px;" data-id="12954" class="btn btn-primary" onclick="javascript:window.open('/p/19031290414350554','_blank')">预览</span>
+
+            <span class="btn btn-default btnQuestionnaireList">返回列表</span>
+
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div class="col-xs-12 allActionContent" style="border-bottom: 0px;font-size:14px;padding-left:0px;padding-right:0px;">
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+    var type = "wjmc";
+    var questionnaireId=12954;
+    $(".questionTabSelect a[type=" + type + "]").css("color","gray");
+    var url = "";
+    if (type == "wjmc") {
+        url = "/questionnaire/QuestionnaireEdit?questionnaireId=" + questionnaireId;
+
+    }
+    if (type == "wjtm") {
+        url = "/questionnaire/QuestionManager?questionnaireId=" + questionnaireId;
+
+    }
+    if (type == "wjwg") {
+        url = "/questionnaire/AppearanceManager?questionnaireId=" + questionnaireId;
+
+    }
+    if (type == "wjsz") {
+        url = "/questionnaire/SettingManager?questionnaireId=" + questionnaireId;
+
+    }
+    if (type == "wjcb") {
+        url = "/questionnaire/SpreadManager?questionnaireId=" + questionnaireId;
+
+    }
+     if (type == "wjhs") {
+         url = "/questionnaire/RecyclingManager?questionnaireId=" + questionnaireId;
+
+     }
+      if (type == "dtfx") {
+          url = "/questionnaire/SingleAnalysisManager?questionnaireId=" + questionnaireId;
+
+    }
+      if (type == "jcfx") {
+          url = "/questionnaire/CrossAnalysisManager?questionnaireId=" + questionnaireId;
+
+    }
+    $.get(url, function (html) {
+        $(".allActionContent").html(html);
+    });
+
+    $(".questionTabSelect a").click(function(){
+        var thisType=$(this).attr("type");
+        if ($(this).css("color")=="gray") {
+            return false;
+        }
+        $(".questionTabSelect a[type=" + thisType + "]").css("color","gray").siblings("a").css("color","#428bca");
+        //todo
+        var thisUrl="";
+        if (thisType=="wjmc") {
+            thisType = "/questionnaire/QuestionnaireEdit?questionnaireId=" + questionnaireId;
+        }
+        if (thisType=="wjtm") {
+            thisType = "/questionnaire/QuestionManager?questionnaireId=" + questionnaireId;
+        }
+        if (thisType=="wjwg") {
+            thisType = "/questionnaire/AppearanceManager?questionnaireId=" + questionnaireId;
+        }
+        if (thisType=="wjsz") {
+            thisType = "/questionnaire/SettingManager?questionnaireId=" + questionnaireId;
+        }
+        if (thisType=="wjcb") {
+            thisType = "/questionnaire/SpreadManager?questionnaireId=" + questionnaireId;
+        }
+        if (thisType=="wjhs") {
+            thisType = "/questionnaire/RecyclingManager?questionnaireId=" + questionnaireId;
+        }
+        if (thisType == "dtfx") {
+            thisType = "/questionnaire/SingleAnalysisManager?questionnaireId=" + questionnaireId;
+
+        }
+        if (thisType == "jcfx") {
+            thisType = "/questionnaire/CrossAnalysisManager?questionnaireId=" + questionnaireId;
+
+        }
+        $.get(thisType, function (html) {
+            $(".allActionContent").html(html);
+        });
+    });
+
+    //发布
+
+    $(".btnQuestionnaireStart").click(function () {
+        if (confirm("发布之后问卷题目不能修改了，你确定要发布吗") == false) {
+            return false;
+        }
+        $cur = $(this);
+        var id = $(this).data("id");
+        var url = "/questionnaire/QuestionnaireStart?id=" + id;
+        $.get(url, function (html) {
+            if (html == "ok") {
+                $cur.hide();
+                alert("发布成功");
+            } else {
+                alert(html);
+            }
+        });
+    });
+
+    $(".btnQuestionnaireList").click(function () {
+        $.get("/questionnaire/list", function (html) {
+            $(".main-right").html(html);
+        });
+    });
+</script>

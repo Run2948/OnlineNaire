@@ -96,8 +96,10 @@
     <Compile Include="Dto\UserInfoOutputDto.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\Enum\LoginType.cs" />
+    <Compile Include="Entity\Enum\QuestionType.cs" />
     <Compile Include="Entity\GeneratedId.cs" />
     <Compile Include="Entity\Table\LoginRecord.cs" />
+    <Compile Include="Entity\Table\Question.cs" />
     <Compile Include="Entity\Table\SystemSetting.cs" />
     <Compile Include="Entity\Table\UserInfo.cs" />
     <Compile Include="Migrations\Configuration.cs" />

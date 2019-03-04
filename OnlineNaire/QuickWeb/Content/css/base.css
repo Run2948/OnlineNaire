@@ -1,0 +1,169 @@
+html, body {
+    font-family: "微软雅黑",Verdana,Arial,Lucida,Helvetica,"宋体",,sans-serif;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    color: black;
+}
+/*a标签处理*/
+a:hover,
+a:focus {
+ color: #428bca;
+ background-color:transparent;
+  text-decoration: underline;
+}
+.form-control {
+    padding: 3px 6px;
+    height: auto;
+}
+
+.btn {
+    padding: 3px 6px;
+    font-size: 14px;
+    border-radius: 0px;
+}
+
+th, td {
+    text-align: center;
+    padding: 0px;
+}
+
+.table td {
+    vertical-align: auto !important;
+}
+/*字体居中*/
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+.header {
+    font-size: 13px;
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+    height: 35px;
+}
+
+    .header div {
+        margin: 0 auto;
+        text-align: center;
+        line-height: 35px;
+    }
+
+        .header div span {
+            margin-right: 3px;
+        }
+
+
+
+.navigation {
+    margin-bottom: -10px;
+}
+
+
+
+    .navigation > div {
+        background-color: #5e87b0;
+    }
+
+    .navigation > div {
+        background-color: rgb(28, 26, 29);
+    }
+
+    .navigation li {
+        padding: 10px 20px 10px 20px;
+        margin: 0px;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+        .navigation li.on {
+            background-color: #6d6d6d;
+        }
+
+        .navigation li:hover {
+            background-color: #6d6d6d;
+        }
+
+.mainbody .menu-left {
+    background-color: #dddddd;
+    padding: 0px;
+    width: 10%;
+    float: left;
+    color: #363533;
+    font-size: 14px;
+}
+
+    .mainbody .menu-left .two-level {
+        padding: 5px 20px;
+        font-size: 14px;
+        padding-left: 20px;
+        cursor: pointer;
+    }
+
+    .mainbody .menu-left ul {
+        margin-bottom: 0px !important;
+    }
+
+    .mainbody .menu-left li {
+        padding: 5px 20px;
+        font-size: 13px;
+        margin-left: 30px;
+        cursor: pointer;
+        list-style: none;
+    }
+
+        .mainbody .menu-left li.on {
+            background-color: #fff;
+        }
+
+        .mainbody .menu-left li:hover {
+            background-color: #6d6d6d;
+        }
+
+    .mainbody .menu-left .two-level:hover {
+        background-color: #6d6d6d;
+    }
+
+.mainbody .main-right {
+    width: 90%;
+    padding: 0px 15px 0px 15px;
+}
+/*内容面板去圆角*/
+.panel {
+    border-radius: 0px;
+}
+
+.footer {
+    height: 20px;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    left: 0;
+}
+
+#formSearch label {
+    font-weight: normal;
+}
+
+.error {
+    color: #b94a48;
+}
+
+input.error {
+    border: 1px solid #b94a48;
+}
+
+textarea.error {
+    border: 1px solid #b94a48;
+    display: inline-block;
+}

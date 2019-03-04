@@ -1,0 +1,149 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="huisoujindu" style="height:200px;" class="col-xs-8 huisoujindu">
+        </div>
+        <div id="dajuanlaiyuan" style="height:200px;" class="col-xs-4 dajuanlaiyuan">
+
+        </div>
+    </div>
+    <div class="col-xs-12" style="height:20px;border-bottom:1px solid #ccc;margin-bottom:20px;"></div>
+    <div class="col-xs-12">
+        <div class="">
+            <form class="form-inline" id="formSearch">
+                <input type="hidden" name="pageIndex" id="pageIndex" value="1" />
+
+                <input type="hidden" name="questionnaireId" value="12954" />
+                <div class="form-group">
+                    来源:&nbsp;&nbsp;<select class='form-control' name='Source'> <option value='-1000' selected='selected'>--请选择--</option> <option value='1'>手机</option> <option value='2'>电脑</option></select>
+
+                </div>
+                <div class="form-group">
+                    <input name="SendName" id="SendName" style="width:120px;" placeholder="请输入姓名" value="" class="form-control" type="text" />
+
+                    <input name="SendPhone" id="SendPhone" style="width:120px;" placeholder="请输入手机号" value="" class="form-control" type="text" />
+                </div>
+                <div class="form-group">
+                    提交时间: <input style="width:120px;" placeholder="开始时间" id="startConfirmTime" name="startConfirmTime" type="text" class="form-control" value="" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd', maxDate: '#F{$dp.$D(\'endConfirmTime\')||\'2050-10-01\'}' })">
+                    -<input style="width:120px;" placeholder="截止时间" id="endConfirmTime" name="endConfirmTime" type="text" class="form-control" value="" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'startConfirmTime\')||\'2050-10-01\'}' })">
+
+                </div>
+
+
+                <span class="btn btn-info btnAnswerRecordSearch" aria-hidden="true">搜索</span>
+                <span class="btn btn-info btnAnswerRecordExport" data-id="12954" aria-hidden="true">导出答卷</span>
+
+
+
+
+            </form>
+        </div>
+        <div id="loanTable" class="" style="border-bottom: 0px;font-size:14px;margin-bottom:3px;margin-top:3px;width:1140px;overflow-x:scroll;">
+
+        </div>
+        <div>
+            <div class="pagesizes">
+                <!-- 显示分页条 -->
+                <div id="Pagination" class="mypagebar">
+                </div>
+            </div>
+            <!-- 显示总记录数 -->
+            <div id="pageSetting">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var pagedListUrl = "/Questionnaire/RecyclingPagedList";
+    LoadPageBar(pagedListUrl, "Pagination", 0);
+    $(".btnAnswerRecordSearch").click(function () {
+        $("#pageIndex").val(1);
+        LoadPageBar(pagedListUrl, "Pagination", 0);
+    });
+
+    $(".btnAnswerRecordExport").click(function () {
+
+        window.open("/Questionnaire/AnsweredRecordExport?" + $("#formSearch").serialize());
+    });
+
+    $(".btnAnswerRecordImport").click(function () {
+        var questionnaireId= $(this).data("id");
+        $("#myModalLabel").text("答卷导入").parent().parent().parent().css("width", "800px");
+        $("#myModalLabel").parent().show();
+        $.get("/Questionnaire/AnswerRecordImportView", {id:questionnaireId}, function (html) {
+            $("#myContent").html(html);
+
+
+        });
+    });
+    dajuanlaiyuan();
+    huisoujindu();
+    function huisoujindu() {
+
+        var myChart = echarts.init(document.getElementById('huisoujindu'), 'macarons');
+        var option = {
+            title : {
+                text: '答卷进度统计:已回收数量0,回收限制:不限制',
+                subtext: ''
+            },
+            legend: {
+                data:['2011年']
+            },
+            xAxis : [
+                {
+                    type : 'value',
+                    boundaryGap : [0, 0.01]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'category',
+                    data : ['已回收数量','回收限制']
+                }
+            ],
+            series : [
+                {
+                    name:'',
+                    type:'bar',
+                    data:[0,0]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+    function dajuanlaiyuan() {
+
+        var myChart = echarts.init(document.getElementById('dajuanlaiyuan'), 'macarons');
+        var option = {
+            title: {
+                text: "答卷渠道统计",
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            series: [
+                {
+                    name: "访问来源",
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                        {name:"手机访问",value:0},
+                        {name:"电脑访问",value:0}
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+</script>

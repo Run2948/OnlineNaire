@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="modal-body">
+
+    <form id="form1">
+
+        <div class="form-horizontal col-sm-12">
+            <div class="form-group">
+
+                <div class="col-sm-12">
+                    <input id="Name" name="Name" placeholder="请输入问卷名称" class="form-control" type="text">
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+<div class="modal-footer" style="border-top: medium;">
+    <span class="btn btn-default formCancel" data-dismiss="modal">取消</span>
+    <span class="btn btn-primary formSubmit">保存</span>
+
+</div>
+
+<script>
+    $(function () {
+        //前端无刷新验证
+        var vForm = $("#form1").validate({
+            errorElement: "span",
+            rules: {
+                Name: { required: true, minlength: 1, maxlength: 32 }
+
+            },
+            messages: {
+                Name: { required: "请填写问卷名称", maxlength: "最长32位" }
+            },
+            submitHandler: function (form) {  //通过之后回调
+                var arr = $("#form1").serialize();
+                $.post("/Questionnaire/CreateSave", arr, function (data) {
+                    if (data.code == "success") {
+                        alert("保存成功");
+                        $(".formCancel").click();
+
+                        //$("#pageIndex").val(1);
+                        //LoadPageBar("/Questionnaire/PagedList", "Pagination", $("#pageIndex").val() - 1);
+
+                        var url = "/questionnaire/QuestionnaireManager?questionnaireId=" + data.id + "&type=wjtm";
+                        $.get(url, function (html) {
+                            $(".main-right").html(html);
+                        });
+                    }
+                    else {
+                        if (data.type != 1) {
+                            alert(data);
+                        }
+                    }
+                },"json");
+            },
+            invalidHandler: function (form, validator) {  //不通过回调
+                return false;
+            }
+        });
+        //提交数据
+        $(".formSubmit").click(function () {
+
+            $("#form1").submit();
+        });
+
+    });
+
+
+</script>
+

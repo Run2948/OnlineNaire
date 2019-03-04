@@ -1,0 +1,232 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<style>
+    .wjszDivList label {
+        /*font-weight: normal;*/
+    }
+
+    .wjszDivList .form-inline {
+        margin-bottom: 15px;
+    }
+</style>
+<div class="wjszDivList">
+    <form id="qjszForm">
+        <input type="hidden" name="ID" value="12954" />
+        <div class="panel panel-info">
+            <div class="panel-heading" style="font-weight:bold;">全局设置</div>
+            <div class="panel-body">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="MaxAnswerCout">回收限制:</label>
+                        <input type="text" class="form-control" id="MaxAnswerCout" name="MaxAnswerCout" value="" placeholder="不限制">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="StartDate">开始日期:</label>
+                        <input id="StartDate" name="StartDate" type="text" class="form-control" value="" placeholder="不设置" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm', maxDate: '#F{$dp.$D(\'EndDate\')||\'2050-10-01\'}' })">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="EndDate">结束日期:</label>
+                        <input id="EndDate" name="EndDate" type="text" class="form-control" value="" placeholder="不设置" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm', minDate: '#F{$dp.$D(\'StartDate\')||\'2050-10-01\'}' })">
+
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="IsShowValidateCode">提交时输入验证码:</label>
+                        <input type="checkbox" class="form-control" value="true" id="IsShowValidateCode" name="IsShowValidateCode" />
+
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="IsShowQuestionIndex">是否显示题号:</label>
+                        <input type="checkbox" class="form-control" value="true" id="IsShowQuestionIndex" checked name="IsShowQuestionIndex" />
+
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="IsShowProgressBar">是否显示进度条:</label>
+                        <input type="checkbox" class="form-control" value="true" id="IsShowProgressBar" checked name="IsShowProgressBar" />
+
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <span class="btn btn-primary btnqjsz">保存</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="aqszForm">
+        <input type="hidden" name="ID" value="12954" />
+        <div class="panel panel-info">
+            <div class="panel-heading" style="font-weight:bold;">问卷类型</div>
+            <div class="panel-body">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="MaxAnswerCout">问卷类型:</label>
+                        <label class="radio-inline">
+                            <input style="margin-top:1px;" type="radio" checked name="SendType" id="1" value="1" />
+                            <span>公开问卷</span>
+                        </label>
+                        <label class="radio-inline">
+                            <input style="margin-top:1px;" type="radio" name="SendType" id="2" value="2" />
+                            <span>单密码问卷</span>
+                        </label>
+                        <label class="radio-inline">
+                            <input style="margin-top:1px;" type="radio" name="SendType" id="3" value="3" />
+                            <span>密码列表问卷</span>
+                        </label>
+                        <label class="radio-inline">
+                            <input style="margin-top:1px;" type="radio" name="SendType" id="4" value="4" />
+                            <span>短信验证问卷</span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="PasswordHint">说明:</label>
+                        <div style="color:red;display:inline-block;">
+                            1. 公开问卷：扫码或输入问卷地址答卷。<br />
+                            2. 单密码问卷：扫码或输入问卷地址后输入问卷密码答卷。<br />
+                            3. 密码列表问卷：添加一批答题密码，输入答题密码后答卷。<br />
+                            4. 短信验证问卷：添加一批手机号，输入手机号和短信验证码答卷。
+                        </div>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="PasswordHint">密码提示文字:</label>
+                        <input id="PasswordHint" name="PasswordHint" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="Password">答题密码:</label>
+                        <input id="Password" name="Password" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <span class="btn btn-info btnPwdListView" data-toggle="modal" data-target="#myWindows" data-id="12954" aria-hidden="true">添加/编辑密码</span>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <span class="btn btn-info btnPhoneListView" data-toggle="modal" data-target="#myWindows" data-id="12954" aria-hidden="true">添加/编辑手机号</span>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <span class="btn btn-primary btnwjlx">保存</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+    //问卷类型处理
+    SendTypeChange($(":radio[name=SendType]:checked").val());
+    $(":radio[name=SendType]").click(function () {
+        var sendType = $(this).val();
+        SendTypeChange(sendType);
+    });
+    function SendTypeChange(sendType) {
+        if (sendType == 1) {
+            $("#PasswordHint,#Password,.btnPwdListView,.btnPhoneListView").parent().parent().hide();
+        }
+        if (sendType == 2) {
+            $(".btnPwdListView,.btnPhoneListView").parent().parent().hide();
+            $("#PasswordHint,#Password").parent().parent().show();
+        }
+        if (sendType == 3) {
+            $("#Password,.btnPhoneListView").parent().parent().hide();
+            $("#PasswordHint,.btnPwdListView").parent().parent().show();
+        }
+        if (sendType == 4) {
+            $("#Password,.btnPwdListView,#PasswordHint").parent().parent().hide();
+            $(".btnPhoneListView").parent().parent().show();
+        }
+    }
+
+    //全局设置保存
+    $(".btnqjsz").click(function () {
+        $.post("/Questionnaire/SettingBaseSave", $("#qjszForm").serialize(), function (data) {
+            if (data == "ok") {
+                alert("设置成功");
+            } else {
+                if (data.type != 1) {
+                    alert(data);
+                }
+            }
+        });
+    });
+    //编辑密码列表
+    $(".btnPwdListView").click(function () {
+        var questionnaireId = $(this).data("id");
+        $("#myModalLabel").text("密码列表管理").parent().parent().parent().css("width", "600px");
+        $("#myModalLabel").parent().show();
+        $.get("/Questionnaire/SettingPwdListView", { questionnaireId: questionnaireId, QuestionnaireSendType: 3 }, function (html) {
+            $("#myContent").html(html);
+        });
+    });
+    //编辑手机号
+    $(".btnPhoneListView").click(function () {
+        var questionnaireId = $(this).data("id");
+        $("#myModalLabel").text("手机号列表管理").parent().parent().parent().css("width", "600px");
+        $("#myModalLabel").parent().show();
+        $.get("/Questionnaire/SettingPhoneListView", { questionnaireId: questionnaireId, QuestionnaireSendType: 4 }, function (html) {
+            $("#myContent").html(html);
+        });
+    });
+
+    //问卷类型保存
+    $(".btnwjlx").click(function () {
+        var sendType = $(":radio[name=SendType]").val();
+        if (sendType==2) {
+            var PasswordHint = $("#PasswordHint").val();
+            if (PasswordHint == "" || PasswordHint==null) {
+                alert("请输入密码提示文字");
+            }
+            var Password = $("#Password").val();
+            if (Password == "" || Password == null) {
+                alert("请输入答题密码");
+            }
+
+        }
+        if (sendType == 3) {
+            var PasswordHint = $("#PasswordHint").val();
+            if (PasswordHint == "" || PasswordHint == null) {
+                alert("请输入密码提示文字");
+            }
+        }
+        $.post("/Questionnaire/SettingSendTypeSave", $("#aqszForm").serialize(), function (data) {
+            if (data == "ok") {
+                alert("设置成功");
+            } else {
+                if (data.type != 1) {
+                    alert(data);
+                }
+            }
+        });
+    });
+</script>

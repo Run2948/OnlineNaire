@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="panel-body">
+    <form id="form1">
+        <input id="ID" name="ID" type="hidden" class="form-control" value="12954">
+        <div class="form-inline">
+
+            <div class="form-group col-sm-12" style="margin-bottom: 5px;">
+                <label for="Name" class="control-label text-right">问卷名称：</label>
+                <textarea id="Name" name="Name" rows="1" style="width:670px;" class="form-control">111111111</textarea>
+            </div>
+            <div class="form-group col-sm-12" style="margin-bottom: 5px;">
+                <label for="BeforeSummary" class="control-label text-right">前置说明：</label>
+                <textarea id="BeforeSummary" name="BeforeSummary" style="width:670px;height:250px;" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group col-sm-12 " style="margin-bottom: 5px;">
+                <label for="AfterSummary" class="control-label text-right">后置说明：</label>
+                <textarea id="AfterSummary" name="AfterSummary" style="width:670px;height:250px;visibility:hidden;" class="form-control"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="panel-footer">
+    <div class="btn btn-default btn-success btn-lg btnSave" style="margin-left:100px;">保存</div>
+
+</div>
+
+
+<script type="text/javascript">
+    KindEditor.ready(function (K) {
+        window.BeforeSummary = K.create("#BeforeSummary");
+        window.AfterSummary = K.create("#AfterSummary");
+        $(".ke-container").addClass("form-control");
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        $(".btnSave").click(function () {
+            $("#BeforeSummary").val(BeforeSummary.html());
+            $("#AfterSummary").val(AfterSummary.html());
+            $.post("/Questionnaire/QuestionnaireEdit", $("#form1").serialize(), function (data) {
+                if (data == "ok") {
+                    alert("保存成功");
+
+                } else {
+                    if (data.type != 1) {
+                        alert(data);
+                    }
+                }
+
+            });
+
+        });
+
+    });
+
+</script>

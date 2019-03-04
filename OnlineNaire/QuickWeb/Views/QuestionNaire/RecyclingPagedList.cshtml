@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!--后台分页使用-->
+
+
+<style>
+    .myanswerListDivPageList > tbody > tr > td {
+        padding: 5px;
+    }
+</style>
+<div style="width:1200px">
+    <table class="table table-bordered myanswerListDivPageList">
+        <tr class="info">
+            <td width="50px">ID</td>
+            <td width="100px">操作</td>
+            <td width="150px">打开时间</td>
+            <td width="150px">提交时间</td>
+            <td width="100px">答卷时长</td>
+            <td width="120px">IP</td>
+            <td width="50px">答卷渠道</td>
+            <td width="100px">答题人</td>
+            <td width="100px">手机号</td>
+
+        </tr>
+    </table>
+</div>
+
+<script>
+
+
+    $(".senrecordDelete").click(function () {
+        if (confirm("你确定要删除吗") == false) {
+            return false;
+        }
+        var id = $(this).data("id");
+        var $this = $(this);
+        var url = "/questionnaire/SettingSendRecordDelete?id=" + id;
+        $.get(url, function (html) {
+            if (html == "ok") {
+                $this.parent().parent().remove();
+
+            } else {
+                alert(html);
+            }
+        });
+    });
+    function recordDelete(id) {
+        if (confirm("你确定要删除此答卷吗?")==false) {
+            return false;
+        }
+        $.get("/questionnaire/AnswerRecordDelete",{id:id}, function (html) {
+            if (html == "ok") {
+                var pagedListUrl = "/Questionnaire/RecyclingPagedList";
+                LoadPageBar(pagedListUrl, "Pagination", $("#pageIndex").val() - 1);
+
+            } else {
+                alert(html);
+            }
+        });
+    }
+</script>
+
+<input type="hidden" id="hidden_rows" value="0" />
+<input type="hidden" id="hidden_pageSize" value="10" />
+<input type="hidden" id="hidden_pageCount" value="0" />
+<input type="hidden" id="hidden_pageIndex" value="1" />
+

@@ -1,0 +1,250 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<link href="/Content/css/questionManager_css.css" rel="stylesheet" />
+<!--题目类型-->
+<div class="questionTypeSelect">
+    <a href="javascript:void(0);" onclick="danxuan()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-dot-circle-o fa-1x"></i>单选
+    </a>
+    <a href="javascript:void(0);" onclick="duoxuan()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-check-square-o fa-1x"></i>多选
+    </a>
+    <a href="javascript:void(0);" onclick="tiankong()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-file-text-o fa-1x"></i>填空
+    </a>
+    <a href="javascript:void(0);" onclick="juzhen()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-table fa-1x"></i>矩阵
+    </a>
+    <a href="javascript:void(0);" onclick="duanluo()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+
+        <i class="fa fa-list fa-1x"></i>段落说明
+    </a>
+    <a href="javascript:void(0);" onclick="paixu()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-list-ol fa-1x"></i>排序
+    </a>
+    <a href="javascript:void(0);" onclick="xialacaidan()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-caret-square-o-down fa-1x"></i>下拉菜单
+    </a>
+    <a href="javascript:void(0);" onclick="erjixialacaidan()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-caret-square-o-down fa-1x"></i>
+        <i class="fa fa-caret-square-o-down fa-1x"></i>二级下拉菜单
+    </a>
+    <a href="javascript:void(0);" onclick="questionFastAdd()" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+        <i class="fa fa-plus fa-1x"></i>快捷添加
+    </a>
+
+
+</div>
+
+<!--所有题目-->
+<div id="allQuestionsScroll" style="background-color:white; width:100%;height:500px;padding:15px;overflow-y:scroll">
+    <div class="questionItem" id="questionItem_16091">
+        <div class="questionItem_name">
+            <div style="float:left;">
+
+                <span class="questionItem_name_index">1.</span>
+                <span>
+                    你是不是傻？
+                    <a href="#" style="font-weight:normal;">[单选]</a>
+                </span>
+                <span class="questionItem_name_ismustSelect">*</span>
+            </div>
+
+            <div style="float:right;">
+                <span class="btn btn-default questionEdit" data-id="16091" data-toggle="modal" data-target="#myWindows" aria-hidden="true" style="padding:2px 6px;">编辑</span>
+                <span class="btn btn-default questionDelete" data-id="16091" style="padding:2px 6px;">删除</span>
+                <span class="btn btn-default questionMoveUp" data-id="16091" style="padding:2px 6px;">上移</span>
+                <span class="btn btn-default questionMoveDown" data-id="16091" style="padding:2px 6px;">下移</span>
+                <span class="btn btn-default  questionLogicSetting" data-id="16091" data-toggle="modal" data-target="#myWindows" aria-hidden="true" style="padding:2px 6px;">添加页面逻辑</span>
+
+
+
+            </div>
+        </div>
+
+        <div style="clear:both; "></div>
+        <hr />
+
+        <div class="questionItem_option">
+            <span style="margin-right:8px;">
+                <input id="question_16091_61313" name="question_16091" value="question_16091_61313" type="radio" />
+                <label for="question_16091_61313">是</label>
+            </span>
+            <span style="margin-right:8px;">
+                <input id="question_16091_61314" name="question_16091" value="question_16091_61314" type="radio" />
+                <label for="question_16091_61314">否</label>
+            </span>
+
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+    //题目滚动条的高度根据屏幕大小变化
+    var height = document.body.offsetHeight - 160;
+    $("#allQuestionsScroll").css("height", height + "px");
+
+
+    var questionIdScroll = "";
+    if (questionIdScroll != "") {
+        var container = $('#allQuestionsScroll');
+        var scrollTo = $('#questionItem_' + questionIdScroll);
+        scrollToLocation(container, scrollTo);
+
+    }
+
+    function scrollToLocation(boxid, curid) {
+        var mainContainer = boxid,
+            scrollToContainer = curid;
+        //非动画效果
+        //mainContainer.scrollTop(
+        //  scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
+        //);
+        //动画效果
+        mainContainer.animate({
+            scrollTop: scrollToContainer.offset().top - mainContainer.offset().top + mainContainer.scrollTop()
+        }, 1500);//2秒滑动到指定位置
+    }
+    var questionnaireId = 12954;
+    function danxuan() {
+        questionEdit(1, 0);
+    }
+    function duoxuan() {
+        questionEdit(2, 0);
+    }
+    function tiankong() {
+        questionEdit(3, 0);
+    }
+    function juzhen() {
+        questionEdit(4, 0);
+    }
+    function duanluo() {
+        questionEdit(5, 0);
+    }
+    function paixu() {
+        questionEdit(6, 0);
+    }
+    function xialacaidan() {
+        questionEdit(7, 0);
+    }
+    function erjixialacaidan() {
+        questionEdit(8, 0);
+    }
+    var questionnaireStatus = 1;
+    $(".questionEdit").click(function () {
+        if (questionnaireStatus != 1) {
+            alert("问卷已发布，不能编辑");
+            return false;
+        }
+        var questionId = $(this).data("id");
+        questionEdit(0, questionId);
+    });
+    $(".questionDelete").click(function () {
+        if (questionnaireStatus != 1) {
+            alert("问卷已发布，不能删除");
+            return false;
+        }
+        var questionId = $(this).data("id");
+        $.get("/Questionnaire/QuestionDelete", { questionId: questionId }, function (data) {
+            if (data == "ok") {
+                $("#questionItem_" + questionId).remove();
+                for (var i = 0; i < $(".questionItem_name_index").length; i++) {
+                    $(".questionItem_name_index").eq(i).text((i + 1) + ".");
+                }
+            }
+        });
+    });
+
+    $(".questionMoveUp").click(function () {
+        debugger;
+        var questionId = $(this).data("id");
+        var $cur = $("#questionItem_" + questionId);
+        if ($cur.prevAll().length > 0) {
+            $.get("/Questionnaire/questionMoveUp", { questionId: questionId }, function (data) {
+                if (data == "ok") {
+                    $cur.prev().before($cur);
+                    for (var i = 0; i < $(".questionItem_name_index").length; i++) {
+                        $(".questionItem_name_index").eq(i).text((i + 1) + ".");
+                    }
+                }
+            });
+        }
+
+    });
+
+    $(".questionMoveDown").click(function () {
+        var questionId = $(this).data("id");
+        var $cur = $("#questionItem_" + questionId);
+        if ($cur.nextAll().length > 0) {
+            $.get("/Questionnaire/questionMoveDown", { questionId: questionId }, function (data) {
+                if (data == "ok") {
+                    $cur.next().after($cur);
+                    for (var i = 0; i < $(".questionItem_name_index").length; i++) {
+                        $(".questionItem_name_index").eq(i).text((i + 1) + ".");
+                    }
+                }
+            });
+        }
+
+    });
+
+    $(".questionLogicSetting").click(function () {
+        var questionId = $(this).data("id");
+        $("#myModalLabel").text("页面显示隐藏逻辑设置").parent().parent().parent().css("width", "1000px");
+        $("#myModalLabel").parent().show();
+        $.get("/Questionnaire/QuestionLogicSettingView", { questionnaireId: questionnaireId, questionId: questionId }, function (html) {
+            $("#myContent").html(html);
+        });
+    });
+
+
+    function questionEdit(type, questionId) {
+        if (questionnaireStatus != 1) {
+            alert("问卷已发布，不能编辑");
+            return false;
+        }
+        $("#myModalLabel").text("添加").parent().parent().parent().css("width", "1000px");
+        $("#myModalLabel").parent().hide();
+        $.get("/Questionnaire/QuestionAdd", { questionnaireId: questionnaireId, questionType: type, questionId: questionId }, function (html) {
+            $("#myContent").html(html);
+        });
+    }
+    //快捷添加
+    function questionFastAdd() {
+        if (questionnaireStatus != 1) {
+            alert("问卷已发布，不能编辑");
+            return false;
+        }
+        $("#myModalLabel").text("快捷添加").parent().parent().parent().css("width", "1000px");
+        $("#myModalLabel").parent().hide();
+        $.get("/Questionnaire/QuestionFastAdd", { questionnaireId: questionnaireId }, function (html) {
+            $("#myContent").html(html);
+        });
+    }
+
+
+    $(".firstLevelSelect").change(function () {
+        var data = $(this).val();
+        var secondLevelSelectData = $("#secondLevelSelectData_" + data).val().split(",");
+        var $secondSelect = $(this).next();
+        $secondSelect.html("");
+        var s = "<option value='0'>--请选择--</option>";
+        for (var i = 0; i < secondLevelSelectData.length; i++) {
+            s += "<option value='" + secondLevelSelectData[i] + "'>" + secondLevelSelectData[i] + "</option>";
+        }
+        $secondSelect.html(s);
+    });
+
+</script>
+

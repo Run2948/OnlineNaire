@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<style>
+    .userCenterDiv{
+        padding:15px;
+        
+    }
+    .userCenterDiv li{
+        cursor:pointer;
+        font-size:14px;
+        color:#428bca;
+        text-align:center;
+    }
+    .userCenterDiv li:hover{
+        background-color:#f5f5f5;
+    }
+</style>
+<div class="row userCenterDiv">
+    <div class="col-xs-2">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color:#f5f5f5;" data-url="MyInfoModifyView">个人信息</li>
+            <li class="list-group-item" data-url="PasswordModifyView">密码修改</li>
+            <li class="list-group-item" data-url="CompanyInfoModifyView">公司信息</li>
+            <li class="list-group-item" data-url="MemberManager">成员管理</li>
+            <li class="list-group-item" data-url="MemberLoginLogManager">登录日志</li>
+          
+        </ul>
+    </div>
+    
+    <div class="col-xs-10" id="MemberContentInfo" style="margin-left:0px;border:1px solid #ddd;padding:15px;">
+    
+    </div>
+</div>
+<script>
+    $.get("/member/MyInfoModifyView", function (html) {
+        $("#MemberContentInfo").html(html);
+    });
+    $(".userCenterDiv li").click(function () {
+        $(this).css("background-color", "#f5f5f5").siblings().css("background-color", "white");
+        var url = "/Member/" + $(this).attr("data-url");
+        $.get(url, function (html) {
+            $("#MemberContentInfo").html(html);
+        });
+    });
+</script>
+

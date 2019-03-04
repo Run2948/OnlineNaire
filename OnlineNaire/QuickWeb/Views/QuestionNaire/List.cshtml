@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row" style="padding:15px;">
+    <div class="col-xs-12 everyitem" style="font-weight:bold;font-size:18px;">
+        问卷列表
+    </div>
+    <div class="col-xs-12  everyitem">
+        <form class="form-inline" id="formSearch">
+            <input type="hidden" name="pageIndex" id="pageIndex" value="1" />
+            <div class="btn btn-info  questionnaireCreate" data-toggle="modal" data-target="#myWindows" data-id="0" aria-hidden="true">
+                <span class="glyphicon glyphicon-plus"></span>
+                <span>创建问卷</span>
+            </div>
+
+            <div class="form-group">
+                <input name="NameSearch" id="NameSearch" style="width:200px;" placeholder="请输入问卷名称" value="" class="form-control" type="text" />
+            </div>
+            <select class='form-control' name='pageSize'> <option value='5' selected='selected'>每页5条</option> <option value='10'>每页10条</option> <option value='15'>每页15条</option> <option value='20'>每页20条</option> <option value='30'>每页30条</option> <option value='50'>每页50条</option> <option value='100'>每页100条</option></select>
+            <span class="btn btn-info  btnSearch" aria-hidden="true">
+                <span class="glyphicon glyphicon-search"></span>
+                搜索
+            </span>
+
+        </form>
+    </div>
+    <div id="loanTable" class="col-xs-12 everyitem" style="border-bottom: 0px;font-size:14px;">
+
+    </div>
+    <div>
+        <div class="pagesizes">
+            <!-- 显示分页条 -->
+            <div id="Pagination" class="mypagebar">
+            </div>
+        </div>
+        <!-- 显示总记录数 -->
+        <div id="pageSetting">
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(".questionnaireCreate").click(function () {
+        $("#myModalLabel").text("创建问卷").parent().parent().parent().css("width", "400px");
+        $("#myModalLabel").parent().show();
+        $.get("/Questionnaire/Create", {}, function (html) {
+            $("#myContent").html(html);
+
+
+        });
+    });
+    var pagedListUrl = "/Questionnaire/PagedList";
+    LoadPageBar(pagedListUrl, "Pagination", 0);
+    $(".btnSearch").click(function () {
+        $("#pageIndex").val(1);
+        LoadPageBar(pagedListUrl, "Pagination", 0);
+    });
+</script>

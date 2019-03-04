@@ -17,8 +17,11 @@ namespace QuickWeb
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new JsonNetResultAttribute());
+#if !DEBUG
             filters.Add(new ViewCompressAttribute());
             filters.Add(new QuickExceptionAttribute());
+#endif
+
         }
     }
 }

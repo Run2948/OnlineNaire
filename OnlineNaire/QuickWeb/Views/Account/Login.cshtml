@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>后台登录</title>
+    <link href="/Content/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="login">
+        <div class="message">Super问卷登录中心</div>
+        <div id="darkbannerwrap"></div>
+
+        <form method="post">
+            <input id="name" placeholder="登录名" type="text" value="admin">
+            <hr class="hr15">
+            <input id="password" placeholder="密码" type="password" value="123456">
+
+            <hr class="hr15">
+            <input value="登录" style="width:100%;" id="submit" onclick="login()" type="button">
+
+            <hr class="hr15">
+            <div style="text-align:right;">
+                
+                <a href="/">返回首页</a>
+            </div>
+
+            <hr class="hr20">
+            <div id="errorInfo" style="color:red;">
+                
+            </div>
+        </form>
+        <script>
+            document.onkeydown = function (e) {
+                var ev = document.all ? window.event : e;
+                if (ev.keyCode == 13) {
+                    login();
+                }
+            }
+            function login() {
+                var name = document.getElementById("name").value;
+                var password = document.getElementById("password").value;
+                if (name == "" || name == null) {
+                    document.getElementById("errorInfo").innerText = "请输入登录名";
+                    return false;
+                }
+                if (password == "" || password == null) {
+                    document.getElementById("errorInfo").innerText = "请输入密码";
+                    return false;
+                }
+                document.getElementById("submit").setAttribute("disabled", "disabled");
+                document.getElementById("submit").value = "正在登录……";
+
+                var xhr = ajaxFunction();
+                debugger;
+                xhr.open("POST", "/account/login?timeStamp=" + new Date().getTime(), true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send("name=" + name + "&password=" + password);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+                        var data = xhr.responseText;
+                        if (data == "ok") {
+                          
+                            document.getElementById("submit").value = "登录成功,正在跳转";
+
+                            window.location.href = "/questionnaire";
+                        } else {
+                            document.getElementById("submit").removeAttribute("disabled");
+                            document.getElementById("submit").value = "登录";
+                            document.getElementById("errorInfo").innerText = data;
+                        }
+
+                    }
+                }
+
+            }
+          
+            function ajaxFunction() {
+                var xmlHttp;
+                try { // Firefox, Opera 8.0+, Safari
+                    xmlHttp = new XMLHttpRequest();
+                }
+                catch (e) {
+                    try {// Internet Explorer
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    }
+                    catch (e) {
+                        try {
+                            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        catch (e) { }
+                    }
+                }
+
+                return xmlHttp;
+            }
+
+        </script>
+    </div>
+
+</body>
+</html>

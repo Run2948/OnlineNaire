@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+
+<style>
+    .fxcbDivList label {
+        width: 120px;
+        text-align: right;
+    }
+
+    .fxcbDivList .form-inline {
+        margin-bottom: 15px;
+    }
+</style>
+<div class="fxcbDivList">
+    <div class="panel panel-info">
+        <div class="panel-heading" style="font-weight:bold;">链接二维码</div>
+        <div class="panel-body">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="MaxAnswerCout">电脑端答题链接:</label>
+                    <input type="text" class="form-control" id="pUrl" name="pUrl" value="http://www.eggtwo.com/p/19031290414350554" style="width:350px;">
+                    <span class="btn btn-primary btnPCopy">复制链接</span>
+                    <a href="http://www.eggtwo.com/p/19031290414350554" target="_blank" style="font-weight:bold;margin-left:5px">打开链接</a>
+                </div>
+
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="MaxAnswerCout">手机端答题链接:</label>
+                    <input type="text" class="form-control" id="mUrl" name="mUrl" value="http://www.eggtwo.com/m/19031290414350554" style="width:350px;">
+                    <span class="btn btn-primary btnMCopy">复制链接</span>
+                    <a href="http://www.eggtwo.com/m/19031290414350554" target="_blank" style="font-weight:bold;margin-left:5px">打开链接</a>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="MaxAnswerCout">二维码:</label>
+                    <div id="qsCode" style="width:120px;height:120px;display:inline-block;">
+
+                    </div>
+                    <span>扫一扫手机答题</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/Scripts/jquery-plug-in/jquery-qrcode.min.js"></script>
+<script>
+    //生成二维码
+    $("#qsCode").qrcode({
+        render: "table", //table方式
+        "size": 120,
+        width: 120, //宽度
+        height: 120, //高度
+        text: utf16to8("http://www.eggtwo.com/m/19031290414350554") //任意内容
+    });
+    function utf16to8(str) {
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for (i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007F)) {
+                out += str.charAt(i);
+            } else if (c > 0x07FF) {
+                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+            } else {
+                out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+            }
+        }
+        return out;
+    }
+
+    $(".btnPCopy").click(function () {
+
+
+        copyUrl("pUrl");
+    });
+    $(".btnMCopy").click(function () {
+        copyUrl("mUrl");
+    });
+    function copyUrl(id) {
+        var Url = document.getElementById(id);//对象是文本框内容
+        Url.select(); //选择对象
+        document.execCommand("Copy"); //执行浏览器复制命令
+        alert("复制成功,直接在地址栏粘贴即可.");
+    }
+
+</script>

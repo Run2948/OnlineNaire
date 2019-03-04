@@ -1,0 +1,123 @@
+﻿
+@{
+    Layout = null;
+}
+
+<form id="myInfoForm" target="frameContentInfor" method="post">
+    <div class="form-horizontal col-sm-6">
+        <input type="hidden" name="ID" value="3" />
+        <div class="form-group">
+            <label for="Name" class="control-label col-sm-3">公司名称：</label>
+            <div class="col-sm-9">
+                <input id="Name" name="Name" class="form-control" value="大陆大陆&amp;id=9" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="SiteUrl" class="control-label col-sm-3">公司网址：</label>
+            <div class="col-sm-9">
+                <input id="SiteUrl" name="SiteUrl" class="form-control" value="www.baidu.com" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Address" class="control-label col-sm-3">公司地址：</label>
+            <div class="col-sm-9">
+                <input id="Address" name="Address" class="form-control" value="在美国" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Logo" class="control-label col-sm-3">Logo：</label>
+            <div class="col-sm-9">
+                <input id="Logo" name="Logo" class="form-control" value="/upload/images/company_logo/App_20181121130233.ico" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Logo" class="control-label col-sm-3">Logo上传：</label>
+            <div class="col-sm-6">
+                <input type="file" name="file" id="file" />
+            </div>
+            <div class="col-sm-3">
+                <span class="btn btn-default btnImgUpload">上传</span>
+
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="Logo" class="control-label col-sm-3">Logo展示：</label>
+            <div class="col-sm-9">
+                <img id="imgMainUrl" src="/upload/images/company_logo/App_20181121130233.ico" />
+            </div>
+
+
+        </div>
+        <div class="form-group">
+            <label for="Summary" class="control-label col-sm-3">介绍：</label>
+            <div class="col-sm-9">
+                <textarea id="Summary" name="Summary" rows="4" class="form-control">alert(&#39;dsfsadfsd&#39;)</textarea>
+            </div>
+        </div>
+        <div class="form-group" style="text-align:center;">
+            <span class="btn btn-primary formmyInfoSubmit">修改</span>
+        </div>
+    </div>
+    <iframe id="frameContentInfor" name="frameContentInfor" style="display: none;"></iframe>
+</form>
+
+<script>
+    $(function () {
+        //前端无刷新验证
+        var vForm = $("#myInfoForm").validate({
+            errorElement: "span",
+            rules: {
+
+                Name: { required: true, minlength: 1, maxlength: 32 }
+
+            },
+            messages: {
+
+                Name: { required: "必填信息", maxlength: "最长64位" }
+            },
+            submitHandler: function (form) {  //通过之后回调
+                var arr = $("#myInfoForm").serialize();
+                $.post("/Member/CompanyInfoModifySave", arr, function (data) {
+                    if (data == "ok") {
+                        alert("保存成功");
+
+                    }
+                    else {
+                        if (data.type != 1) {
+                            alert(data);
+                        }
+                    }
+                });
+            },
+            invalidHandler: function (form, validator) {  //不通过回调
+                return false;
+            }
+        });
+        //提交数据
+        $(".formmyInfoSubmit").click(function () {
+
+            $("#myInfoForm").submit();
+        });
+
+    });
+
+    //上传主图
+    $(".btnImgUpload").click(function () {
+
+        $("#myInfoForm").attr("action", "/File/ImgUpload?dfs=0&saveDir=company_logo");
+        $("#myInfoForm").ajaxSubmit({
+            data: {
+            },
+            success: function (data) {
+                if (data.length >= 3) {
+                    if (data.substr(0, 3) == "ok:") {
+                        data = data.substring(3, data.length);
+                        $("#imgMainUrl").attr("src", data);
+                        $("#Logo").val(data);
+                    } else {
+                        alert(data);
+                    }
+                }
+                else {
+                    alert(data);

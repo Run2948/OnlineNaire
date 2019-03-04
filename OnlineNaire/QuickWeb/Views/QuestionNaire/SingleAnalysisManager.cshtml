@@ -1,0 +1,267 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-xs-12" style="margin-bottom:10px;">
+        <div class="col-xs-6">
+            <span>总样本数:</span>
+            <span>0</span>
+
+        </div>
+
+        <div class="col-xs-6" style="text-align:right;padding:0px;">
+
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4" style="background-color:#ddd;text-align:left;font-weight:bold;">
+                    <span>1.</span>
+                    <span>你是不是傻？</span>
+                    <span style="color:#428bca;">[单选]</span>
+                </td>
+            </tr>
+            <tr>
+                <td>选项</td>
+                <td>
+                    <span> 答卷数量</span>
+
+                </td>
+                <td>占比</td>
+                <td>条形图</td>
+            </tr>
+            <tr>
+                <td>是</td>
+                <td>0</td>
+                <td>0.00%</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1" style="width: 0.00%;">
+                            0.00%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>否</td>
+                <td>0</td>
+                <td>0.00%</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1" style="width: 0.00%;">
+                            0.00%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-xs-12" style="margin-bottom:10px;text-align:right;">
+        <span class="btn btn-default btn-primary btnChangeGrap" data-type="0" data-index="1">表格</span>
+
+        <span class="btn btn-default btnChangeGrap" data-type="3" data-index="1">饼状图</span>
+        <span class="btn btn-default  btnChangeGrap" data-type="1" data-index="1">柱状图</span>
+        <span class="btn btn-default btnChangeGrap" data-type="2" data-index="1">折线图</span>
+    </div>
+    <div class="col-xs-12" style="margin-bottom:10px;display:none">
+        <div data-zbindex="zb_1" data-index="1" style="height:300px;" class="div_zb"
+             data-zb="0,0"
+             data-option="是,否">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(".btnChangeGrap").click(function () {
+        var cartogramType = $(this).attr("data-type");
+        var index = $(this).attr("data-index");
+        $(this).addClass("btn-primary").siblings().removeClass("btn-primary");
+
+        // var $obj = $("#zb_" + index);
+        var $obj = $(this).parent().next().find("div[data-zbindex=zb_" + index + "]").eq(0);
+        if (cartogramType==0) {
+            $obj.parent().hide();
+            return;
+        } else {
+            $obj.parent().show();
+        }
+
+        var xxzbs = $obj.attr("data-zb");//占比
+        var options = $obj.attr("data-option");
+        var optionArrr = options.split(",");
+
+        var xxzbArrr = xxzbs.split(",");
+        for (var k = 0; k < xxzbArrr.length; k++) {
+            xxzbArrr[k] = parseFloat(xxzbArrr[k]);
+        }
+        //var obj = document.getElementById("zb_" + index);
+        var obj = $obj.get(0);
+        if (cartogramType == 3) {
+            var xxzbDir = [];
+            for (var m = 0; m < optionArrr.length; m++) {
+                xxzbDir.push({ name: optionArrr[m], value: xxzbArrr[m] });
+            }
+            chartInotToPie(obj, xxzbDir);
+
+        } else {
+            chartInotTobar(obj, optionArrr, xxzbArrr, cartogramType);
+        }
+    });
+
+    //折线图和柱状图
+    function chartInotTobar(obj, options, counts,  cartogramType) {
+
+        var barType = "bar";
+        if (cartogramType == 2) {
+            barType = "line"
+        }
+        var title = "";
+        var name = "";
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(obj, 'macarons');
+        // 指定图表的配置项和数据
+        option = {
+            title: {
+                text: title
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['人数占比&比率']
+            },
+            toolbox: {
+                show: true,
+                color: ['#1e90ff', '#22bb22', '#4b0082', '#d2691e'],
+                backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+                borderColor: '#ccc',       // 工具箱边框颜色
+                borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+                padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+                showTitle: true,
+                feature: {
+                    dataView: { show: false, readOnly: false },
+                    magicType: { show: false, type: ['line', 'bar', "pie"] },
+                    restore: { show: false },
+                    saveAsImage: {
+                        show: true,
+                        title: '保存图片',
+                        type: 'jpeg',
+                        lang: ['点击本地保存']
+                    },
+                    myTool: {
+                        show: true,
+                        title: '切换饼图',
+                        //icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                        onclick: function () {
+                            alert('myToolHandler')
+                        }
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+                y2: 140
+            },
+            xAxis: {
+                data: options,
+                axisLabel: {
+                    interval: 0,
+                    rotate: 40
+                }
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: name,
+                    type: barType,
+                    data: counts,
+
+                }
+            ]
+
+            ,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color:'#2EC7C9'
+                    }
+                }
+            }
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+    //饼状图
+    function chartInotToPie(obj, dir) {
+        var title = "";
+        var name = "";
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(obj, 'macarons');
+        option = {
+            title: {
+                text: title,
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            toolbox: {
+                show: true,
+                color: ['#1e90ff', '#22bb22', '#4b0082', '#d2691e'],
+                backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+                borderColor: '#ccc',       // 工具箱边框颜色
+                borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+                padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+                showTitle: true,
+                feature: {
+                    dataView: { show: false, readOnly: false },
+                    magicType: { show: false, type: ['line', 'bar', "pie"] },
+                    restore: { show: false },
+                    saveAsImage: {
+                        show: true,
+                        title: '保存图片',
+                        type: 'jpeg',
+                        lang: ['点击本地保存']
+                    },
+                    myTool: {
+                        show: true,
+                        title: '切换饼图',
+                        //icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                        onclick: function () {
+                            alert('myToolHandler')
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: name,
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: dir,
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+</script>

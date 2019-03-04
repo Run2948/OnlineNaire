@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!--后台分页使用-->
+
+
+<table class="table table-bordered ">
+    <tr class="info">
+        <td>ID</td>
+        <td>真实姓名</td>
+        <td>登录名</td>
+        <td>手机号</td>
+        <td>邮箱</td>
+        <td>操作</td>
+
+
+    </tr>
+    <tr class="">
+        <td>1</td>
+        <td>陈涵</td>
+        <td>admin</td>
+        <td>18382130770</td>
+        <td>641712388@qq.com</td>
+        <td>
+            <span style="color:red;">管理员</span>
+        </td>
+
+
+
+    </tr>
+</table>
+<script>
+    $(".btnDeleteMember").click(function () {
+        if (confirm("你确定要删除此成员吗")==false) {
+            return false;
+        }
+        $.get("/Member/MemberDelete", { id: $(this).data("id") }, function (data) {
+            if (data=="ok") {
+                LoadPageBar("/Member/MemberPagedList", "Pagination",$("#pageIndex").val());
+
+            } else {
+                alert(data);
+            }
+        });
+    });
+</script>
+<input type="hidden" id="hidden_rows" value="1" />
+<input type="hidden" id="hidden_pageSize" value="10" />
+<input type="hidden" id="hidden_pageCount" value="1" />
+<input type="hidden" id="hidden_pageIndex" value="1" />
+

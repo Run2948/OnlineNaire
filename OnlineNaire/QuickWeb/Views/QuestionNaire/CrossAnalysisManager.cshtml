@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-xs-12" style="margin-bottom:10px;">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <form class="form-inline" id="formSearch">
+                    <!-- 当前页码 -->
+                    <input type="hidden" name="pageIndex" id="pageIndex" value="1" />
+                    <input type="hidden" name="questionnaireId" id="questionnaireId" value="12954" />
+
+                    <div class="form-group">
+                        问题A:
+                        <select name="questionAId" class="form-control" style="width:340px;">
+                            <option value="0">--请选择--</option>
+                            <option value="16091">你是不是傻？</option>
+                        </select>
+
+                        问题B:
+                        <select name="questionBId" class="form-control" style="width:340px;">
+                            <option value="0">--请选择--</option>
+                            <option value="16091">你是不是傻？</option>
+                        </select>
+
+                        <span class="btn btn-success btnCrossSearch" aria-hidden="true">生成报表</span>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="loanTable" class="col-xs-12" style="margin-bottom:10px;">
+
+    </div>
+
+
+</div>
+
+<script>
+    var pagedListUrl = "/Questionnaire/CrossAnalysisList";
+    $(".btnCrossSearch").click(function () {
+        var questionAId = $("select[name=questionAId] option:selected").val();
+        if (questionAId == "0" || questionAId == null || questionAId == "" || questionAId == undefined) {
+            alert("请选择问题A");
+            return false;
+        }
+        var questionBId = $("select[name=questionBId] option:selected").val();
+        if (questionBId == "0" || questionBId == null || questionBId == "" || questionBId == undefined) {
+            alert("请选择问题B");
+            return false;
+        }
+        LoadPageBar(pagedListUrl, "Pagination", 0);
+    });
+
+</script>

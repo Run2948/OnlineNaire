@@ -1,0 +1,268 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <title></title>
+
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <!--ztree-->
+    <link href="/Content/Ztree/css/demo.css" rel="stylesheet" />
+    <link href="/Content/Ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <script src="/Content/Ztree/js/jquery.ztree.all.min.js"></script>
+    <!--printThis-->
+    <script src="/Content/printThis-master/printThis.js"></script>
+    <!--my97-->
+    <script src="/Content/My97DatePicker/WdatePicker.js"></script>
+    <!--kindeditor-->
+    <link href="/Content/kindeditor-4.1.10/themes/default/default.css" rel="stylesheet" />
+
+    <script src="/Content/kindeditor-4.1.10/kindeditor.js"></script>
+    <script src="/Content/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+    <!--select2-->
+    <script src="/Content/Select2/js/select2.full.js"></script>
+    <script src="/Content/Select2/js/i18n/zh-CN.js"></script>
+    <link href="/Content/Select2/css/select2.css" rel="stylesheet" />
+
+    <!--echart-->
+    <script src="/Content/echarts/dist/echarts.min.js"></script>
+    <!--主题-->
+    <script src="/Content/echarts/theme/macarons.js"></script>
+
+    <!--jquery-ui-->
+    <link href="/Content/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" />
+    <script src="/Content/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+    <!--上传文件-->
+    <script src="/Scripts/jquery-plug-in/jquery.form.min.js"></script>
+
+    <!--bootstrap-->
+    <link href="/Content/bootstrap-3.3.0-dist/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="/Content/bootstrap-3.3.0-dist/dist/js/bootstrap.min.js"></script>
+
+    <!--zoom.js 图片放大-->
+    <link href="/Content/zoom/zoom.css" rel="stylesheet" />
+    <script src="/Content/zoom/zoom.min.js"></script>
+
+    <link href="/Content/css/base.css" rel="stylesheet" />
+
+    <!--pageCommon-->
+    <script src="/Content/pageCommon/jquery.pagination.js"></script>
+    <script src="/Content/pageCommon/pageplus.js"></script>
+    <link href="/Content/pageCommon/pagination.css" rel="stylesheet" />
+
+    <!--图标-->
+    <link href="/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+    <script type="text/javascript">
+        KindEditor.ready(function (K) {
+            window.BeforeSummary = K.create("#BeforeSummary");
+            window.AfterSummary = K.create("#AfterSummary");
+            window.NewsContent = K.create("#Content", {
+                cssPath: '/Content/kindeditor-4.1.10/plugins/code/prettify.css',
+                uploadJson: '/Content/kindeditor-4.1.10/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor-4.1.10/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    this.sync();
+                },
+                afterBlur: function () {
+                    this.sync();
+                }
+            });
+        });
+    </script>
+
+</head>
+<body style="background-color:#ececec;">
+
+
+
+
+
+    <style>
+        .navigation > div {
+            /*background-color: #337ab7 !important;*/
+            background-color: #2b3643 !important;
+        }
+
+        .navigation li {
+            height: 50px;
+            padding: 15px 20px;
+        }
+
+            .navigation li.on {
+                background-color: #395b78 !important;
+            }
+
+            .navigation li:hover {
+                background-color: #395b78 !important;
+            }
+
+        .everyitem {
+            border-bottom: 1px solid #eef1f5;
+            padding: 0px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+
+
+    <!--一级菜单-->
+    <div class="navigation">
+        <div>
+            <ul class="list-unstyled list-inline">
+                <li url="http://www.eggtwo.com" data-type="url" style="padding:3px 20px;">
+                    <img src="/Images/logo_uup.png" style="height:50px;width:auto;" />
+                </li>
+                <li url="/questionnaire/list" class="on">问卷列表</li>
+                <li url="/member/index">用户中心</li>
+                <li url="/account/loginout" class="outSystem">安全退出</li>
+
+                <li data-type="none">
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=599871338&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:599871338:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a>
+                </li>
+                <li data-type="none" style="float:right;">当前用户:admin</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="container-fluid" style="min-height:674px;">
+        <div class="row" style="width:1170px;background-color:white;margin:15px auto;">
+            <div class="col-xs-12 main-right">
+                <!--右侧内容-->
+            </div>
+        </div>
+
+    </div>
+
+    <!--模态窗体
+        如果模态框（modal）不设置tabindex="-1"，可以通过tab键切换除模态框外的其他元素的焦点。
+        模态框设置了tabindex='-1'，tab键只能切换模态框内的元素的焦点
+        注意：***当模态窗体设置了tabindex='-1'则select2中的input无法获取到焦点**
+        -->
+    <div class="modal fade" id="myWindows" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-info" style="width: 650px;">
+            <div class="modal-content">
+                <div class="modal-header" style="color: #fff;background-color: #428bca;">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+
+                <div id="myContent"></div>
+
+            </div>
+        </div>
+    </div>
+    <link href="/Content/kefu/kefu.css" rel="stylesheet" />
+    <!--在线客服  -->
+    <div class="scrollsidebar" id="scrollsidebar">
+        <div class="side_content" style="width: 0px;">
+            <div class="side_list">
+                <div class="side_title"><a title="隐藏" class="close_btn"><span>关闭</span></a></div>
+                <div class="side_center">
+                    <div class="custom_service">
+                        <p> <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=599871338&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:599871338:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a></p>
+                    </div>
+                    <div class="other">
+                        <p>
+                            合作洽谈QQ：<br />
+                            599871338<br />
+                            合作洽谈微信：<br />
+                            <img src="/Content/kefu/qrcode.png" width="100" style="margin-top: 5px;" />
+                        </p>
+                        <p>服务热线<br />18601703095</p>
+                    </div>
+                </div>
+                <div class="side_bottom"></div>
+            </div>
+        </div>
+        <div class="show_btn" style="width: 25px;"><span>在线客服</span></div>
+    </div>
+    <script src="/Content/kefu/kefu.js"></script>
+    <script>
+
+
+    $(function () {
+
+        $.get("/questionnaire/list", function (html) {
+            $(".main-right").html(html);
+        });
+        //点击一级菜单
+        $(".navigation li").click(function () {
+
+            firsrMenuClick(this, false, null);
+        });
+        //安全退出
+        $(".navigation .outSystem").click(function () {
+            location.href = "/account/LoginOut";
+        });
+
+    });
+    function firsrMenuClick(objFirst, isAuto, arr) {
+
+        var url = $(objFirst).attr("url");
+
+        if ($(objFirst).attr("data-type")=="url") {
+            window.open(url, "_blank");
+        }
+       else if ($(objFirst).attr("data-type") == "none") {
+
+        }
+       else {
+           $(".navigation li").removeClass("on");
+           $(objFirst).addClass("on");
+            $.get(url, function (html) {
+                $(".main-right").html(html);
+            });
+        }
+
+
+    }
+
+
+    </script>
+
+    <script>
+        //ajax执行成功后的回调
+        $(document).ajaxSuccess(function (event, xhr, setting, response) {
+
+            if (response.type == 0) {
+                var nodeid = $("body").attr("node-id");
+                alert(response.msg);
+                location.href = "/account/login?nodeid=" + nodeid + "&error=" + response.msg;
+            }
+            if (response.type == 1) {
+                alert(response.msg);
+                return false;
+            }
+
+        });
+        //ajax执行失败时后的回调
+        $(document).ajaxError(function (event, xhr, setting, response) {
+            var errorUrl = setting.url;
+
+            if (response == "Not Found" || response == "") {
+                return;
+            }
+            //var result = JSON.stringify(response).replace('"', '').replace('"', '');
+            alert("url【" + errorUrl + "】发生了异常，请联系管理员");
+        });
+
+    </script>
+</body>
+
+</html>

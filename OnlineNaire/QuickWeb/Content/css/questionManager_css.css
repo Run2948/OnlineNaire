@@ -1,0 +1,61 @@
+
+
+.questionTypeSelect {
+    padding: 0px;
+    position: relative;
+    top: 0;
+    background: #337ab7;
+}
+
+    .questionTypeSelect a {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        color: white;
+        font-size: 16px;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+        .questionTypeSelect a:hover {
+            color: white;
+            background-color: #3f678a;
+            text-decoration: none;
+        }
+
+.questionItem {
+    border: 1px solid #cecece;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+    .questionItem:hover {
+        border: 1px solid #337ab7;
+    }
+
+.questionItem_name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.questionItem_name_index {
+    width: 18px;
+    display: inline-block;
+}
+.questionItem_name_ismustSelect{
+    color:red;
+}
+
+.questionItem_option {
+    margin-left: 18px;
+}
+
+    .questionItem_option label {
+        font-weight: normal;
+    }
+
+.questionEdit {
+    padding: 15px;
+    border: 1px solid #bfac43;
+    background-color: #e6f0fb;
+}
