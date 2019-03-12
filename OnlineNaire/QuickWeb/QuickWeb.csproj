@@ -968,6 +968,7 @@
     <Compile Include="Controllers\Common\UserBaseController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\Common\PublicController.cs" />
+    <Compile Include="Controllers\MController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PController.cs" />
     <Compile Include="Controllers\QuestionnaireController.cs" />
@@ -1093,6 +1094,7 @@
   <ItemGroup>
     <Folder Include="Content\kindeditor-4.1.10\attached\" />
     <Folder Include="upload\" />
+    <Folder Include="Views\M\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -32,6 +32,7 @@ namespace QuickWeb.Controllers
         #endregion
 
         #region 创建问卷
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -63,6 +64,7 @@ namespace QuickWeb.Controllers
         #endregion
 
         #region 问卷暂停-开始/发布
+
         [HttpGet]
         public ActionResult QuestionnaireStop(long ?id)
         {
@@ -74,6 +76,7 @@ namespace QuickWeb.Controllers
         {
             return Content("ok");
         }
+
         #endregion
 
         #region 问卷管理
@@ -81,6 +84,7 @@ namespace QuickWeb.Controllers
         [HttpGet]
         public ActionResult QuestionnaireManager(long questionnaireId, string type)
         {
+            ViewBag.Type = type;
             return View();
         } 
 

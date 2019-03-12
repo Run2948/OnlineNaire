@@ -63,34 +63,7 @@
     <!--图标-->
     <link href="/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-
-    <script type="text/javascript">
-        KindEditor.ready(function (K) {
-            window.BeforeSummary = K.create("#BeforeSummary");
-            window.AfterSummary = K.create("#AfterSummary");
-            window.NewsContent = K.create("#Content", {
-                cssPath: '/Content/kindeditor-4.1.10/plugins/code/prettify.css',
-                uploadJson: '/Content/kindeditor-4.1.10/asp.net/upload_json.ashx',
-                fileManagerJson: '/Content/kindeditor-4.1.10/asp.net/file_manager_json.ashx',
-                allowFileManager: true,
-                afterCreate: function () {
-                    this.sync();
-                },
-                afterBlur: function () {
-                    this.sync();
-                }
-            });
-        });
-    </script>
-
-</head>
-<body style="background-color:#ececec;">
-
-
-
-
-
-    <style>
+    <style type="text/css">
         .navigation > div {
             /*background-color: #337ab7 !important;*/
             background-color: #2b3643 !important;
@@ -117,7 +90,27 @@
         }
     </style>
 
+    <script type="text/javascript">
+        KindEditor.ready(function (K) {
+            window.BeforeSummary = K.create("#BeforeSummary");
+            window.AfterSummary = K.create("#AfterSummary");
+            window.NewsContent = K.create("#Content", {
+                cssPath: '/Content/kindeditor-4.1.10/plugins/code/prettify.css',
+                uploadJson: '/Content/kindeditor-4.1.10/asp.net/upload_json.ashx',
+                fileManagerJson: '/Content/kindeditor-4.1.10/asp.net/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    this.sync();
+                },
+                afterBlur: function () {
+                    this.sync();
+                }
+            });
+        });
+    </script>
 
+</head>
+<body style="background-color:#ececec;">
     <!--一级菜单-->
     <div class="navigation">
         <div>
@@ -128,17 +121,13 @@
                 <li url="/questionnaire/list" class="on">问卷列表</li>
                 <li url="/member/index">用户中心</li>
                 <li url="/account/loginout" class="outSystem">安全退出</li>
-
                 <li data-type="none">
                     <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=599871338&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:599871338:51" alt="点击这里给我发消息" title="点击这里给我发消息" /></a>
                 </li>
                 <li data-type="none" style="float:right;">当前用户:admin</li>
-
             </ul>
         </div>
-
     </div>
-
 
     <div class="container-fluid" style="min-height:674px;">
         <div class="row" style="width:1170px;background-color:white;margin:15px auto;">
@@ -146,7 +135,6 @@
                 <!--右侧内容-->
             </div>
         </div>
-
     </div>
 
     <!--模态窗体
@@ -161,9 +149,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
-
                 <div id="myContent"></div>
-
             </div>
         </div>
     </div>
@@ -193,53 +179,42 @@
         <div class="show_btn" style="width: 25px;"><span>在线客服</span></div>
     </div>
     <script src="/Content/kefu/kefu.js"></script>
-    <script>
-
-
+    <script type="text/javascript">
     $(function () {
-
         $.get("/questionnaire/list", function (html) {
             $(".main-right").html(html);
         });
         //点击一级菜单
         $(".navigation li").click(function () {
-
             firsrMenuClick(this, false, null);
         });
         //安全退出
         $(".navigation .outSystem").click(function () {
             location.href = "/account/LoginOut";
         });
-
     });
+
     function firsrMenuClick(objFirst, isAuto, arr) {
-
         var url = $(objFirst).attr("url");
-
         if ($(objFirst).attr("data-type")=="url") {
             window.open(url, "_blank");
         }
-       else if ($(objFirst).attr("data-type") == "none") {
+        else if ($(objFirst).attr("data-type") == "none") {
 
         }
-       else {
+        else {
            $(".navigation li").removeClass("on");
            $(objFirst).addClass("on");
             $.get(url, function (html) {
                 $(".main-right").html(html);
             });
         }
-
-
     }
-
-
     </script>
 
-    <script>
+    <script type="text/javascript">
         //ajax执行成功后的回调
         $(document).ajaxSuccess(function (event, xhr, setting, response) {
-
             if (response.type == 0) {
                 var nodeid = $("body").attr("node-id");
                 alert(response.msg);
@@ -247,21 +222,17 @@
             }
             if (response.type == 1) {
                 alert(response.msg);
-                return false;
+                return;
             }
-
         });
         //ajax执行失败时后的回调
         $(document).ajaxError(function (event, xhr, setting, response) {
             var errorUrl = setting.url;
-
             if (response == "Not Found" || response == "") {
                 return;
             }
-            //var result = JSON.stringify(response).replace('"', '').replace('"', '');
             alert("url【" + errorUrl + "】发生了异常，请联系管理员");
         });
-
     </script>
 </body>
 

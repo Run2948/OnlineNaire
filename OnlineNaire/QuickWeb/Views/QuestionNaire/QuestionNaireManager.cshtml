@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<style>
+<style type="text/css">
     .questionManagerContainer {
         padding: 15px;
     }
@@ -25,7 +25,6 @@
             <i class="fa fa-long-arrow-right"></i>
             <a href="javascript:void(0);" type="wjtm">2.问卷题目</a>
             <i class="fa fa-long-arrow-right"></i>
-
             <a href="javascript:void(0);" type="wjsz">3.问卷设置</a>
             <i class="fa fa-long-arrow-right"></i>
             <a href="javascript:void(0);" type="wjcb">4.问卷传播</a>
@@ -38,60 +37,44 @@
         </div>
         <div style="float:right;">
             <span class="btn btn-primary btnQuestionnaireStart" data-id="12954" style="margin-right:10px;">发布</span>
-            <span style="margin-right:10px;" data-id="12954" class="btn btn-primary" onclick="javascript:window.open('/p/19031290414350554','_blank')">预览</span>
-
+            <span style="margin-right:10px;" data-id="12954" class="btn btn-primary" onclick="javascript:window.open('/p/19031290414350554','_blank');">预览</span>
             <span class="btn btn-default btnQuestionnaireList">返回列表</span>
-
-
         </div>
         <div style="clear:both"></div>
     </div>
-
     <div class="col-xs-12 allActionContent" style="border-bottom: 0px;font-size:14px;padding-left:0px;padding-right:0px;">
 
-
     </div>
-
 </div>
 
-
-
 <script>
-    var type = "wjmc";
+    var type = '@(ViewBag.Type)';
     var questionnaireId=12954;
     $(".questionTabSelect a[type=" + type + "]").css("color","gray");
     var url = "";
     if (type == "wjmc") {
         url = "/questionnaire/QuestionnaireEdit?questionnaireId=" + questionnaireId;
-
     }
     if (type == "wjtm") {
         url = "/questionnaire/QuestionManager?questionnaireId=" + questionnaireId;
-
     }
     if (type == "wjwg") {
         url = "/questionnaire/AppearanceManager?questionnaireId=" + questionnaireId;
-
     }
     if (type == "wjsz") {
         url = "/questionnaire/SettingManager?questionnaireId=" + questionnaireId;
-
     }
     if (type == "wjcb") {
         url = "/questionnaire/SpreadManager?questionnaireId=" + questionnaireId;
-
     }
-     if (type == "wjhs") {
-         url = "/questionnaire/RecyclingManager?questionnaireId=" + questionnaireId;
-
-     }
-      if (type == "dtfx") {
-          url = "/questionnaire/SingleAnalysisManager?questionnaireId=" + questionnaireId;
-
+    if (type == "wjhs") {
+        url = "/questionnaire/RecyclingManager?questionnaireId=" + questionnaireId;
     }
-      if (type == "jcfx") {
-          url = "/questionnaire/CrossAnalysisManager?questionnaireId=" + questionnaireId;
-
+    if (type == "dtfx") {
+        url = "/questionnaire/SingleAnalysisManager?questionnaireId=" + questionnaireId;
+    }
+    if (type == "jcfx") {
+        url = "/questionnaire/CrossAnalysisManager?questionnaireId=" + questionnaireId;
     }
     $.get(url, function (html) {
         $(".allActionContent").html(html);
@@ -100,7 +83,7 @@
     $(".questionTabSelect a").click(function(){
         var thisType=$(this).attr("type");
         if ($(this).css("color")=="gray") {
-            return false;
+            return;
         }
         $(".questionTabSelect a[type=" + thisType + "]").css("color","gray").siblings("a").css("color","#428bca");
         //todo
@@ -125,11 +108,9 @@
         }
         if (thisType == "dtfx") {
             thisType = "/questionnaire/SingleAnalysisManager?questionnaireId=" + questionnaireId;
-
         }
         if (thisType == "jcfx") {
             thisType = "/questionnaire/CrossAnalysisManager?questionnaireId=" + questionnaireId;
-
         }
         $.get(thisType, function (html) {
             $(".allActionContent").html(html);
@@ -137,10 +118,9 @@
     });
 
     //发布
-
     $(".btnQuestionnaireStart").click(function () {
         if (confirm("发布之后问卷题目不能修改了，你确定要发布吗") == false) {
-            return false;
+            return;
         }
         $cur = $(this);
         var id = $(this).data("id");

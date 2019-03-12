@@ -42,14 +42,12 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $(".questionnaireCreate").click(function () {
         $("#myModalLabel").text("创建问卷").parent().parent().parent().css("width", "400px");
         $("#myModalLabel").parent().show();
         $.get("/Questionnaire/Create", {}, function (html) {
             $("#myContent").html(html);
-
-
         });
     });
     var pagedListUrl = "/Questionnaire/PagedList";
